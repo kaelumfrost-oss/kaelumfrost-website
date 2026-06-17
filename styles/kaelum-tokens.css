@@ -1,0 +1,274 @@
+/* ============================================================
+ * KAELUM DESIGN SYSTEM — colors & typography tokens
+ * "Quiet luxury, high contrast, editorial space, one ember accent."
+ *
+ * Load order:
+ *   1. <link> Google Fonts (see fonts/README.md)
+ *   2. This file
+ *   3. Component styles
+ * ============================================================ */
+
+/* ------ Fonts (Google Fonts — see fonts/README.md for substitutions) ------ */
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100;200;300;400;500;600;700;800;900&family=Geist+Mono:wght@300;400;500;600&family=Italiana&display=swap');
+
+:root {
+  /* ============================================================
+   * COLOR — Core palette (deck-canonical names)
+   * Black · Porcelain · Steel · Ember · Smoke · Midnight Accent
+   * ============================================================ */
+
+  --obsidian:        #0B0C0E;   /* near-black; primary stage */
+  --obsidian-pure:   #000000;   /* true black for cinematic depth */
+  --porcelain:       #F2EFE8;   /* warm off-white; editorial paper */
+  --porcelain-pure:  #FFFFFF;   /* clean white */
+  --steel:           #A8B2BE;   /* cool blue-grey; muted UI */
+  --smoke:           #DAD5CB;   /* warm light grey; neutral mid */
+  --charcoal:        #1F2226;   /* elevated surface on obsidian */
+  --midnight:        #4E5C72;   /* deep blue-slate; secondary accent */
+
+  /* Accent — CRIMSON (primary, rebellious) + Ember (warm alt)
+     Use sparingly. ONE accent per composition. */
+  --crimson:         #B12B2B;   /* primary accent — quote marks, eyebrows, buttons, rules */
+  --crimson-deep:    #7E1A1A;   /* hover / pressed crimson */
+  --crimson-soft:    #D96B6B;   /* tinted crimson for hover backgrounds */
+  --crimson-blood:   #5C1010;   /* deepest; reserved for editorial pull-outs */
+  --ember:           #D2745A;   /* warm-light alt accent — for sunset/golden hour scenes only */
+  --ember-deep:      #A85841;
+  --ember-soft:      #E8A38C;
+
+  /* ============================================================
+   * COLOR — Semantic tokens
+   * Use these in components — not raw palette names.
+   * Two surface modes:
+   *   default = obsidian (cinematic, default)
+   *   .light  = porcelain (editorial paper, opt-in via class)
+   * ============================================================ */
+
+  --bg:              var(--obsidian);
+  --bg-elevated:     var(--charcoal);
+  --bg-inverse:      var(--porcelain);
+
+  --fg:              var(--porcelain);
+  --fg-muted:        var(--steel);
+  --fg-subtle:       #6B7280;       /* ~steel × .65 — for fine print */
+  --fg-inverse:      var(--obsidian);
+
+  --accent:          var(--crimson);
+  --accent-hover:    var(--crimson-deep);
+  --accent-on:       var(--porcelain);   /* fg color on accent surface */
+
+  --border:          rgba(242, 239, 232, 0.10);   /* hairline on dark */
+  --border-strong:   rgba(242, 239, 232, 0.22);
+  --divider-accent:  var(--crimson);
+
+  --focus-ring:      var(--crimson);
+
+  /* ============================================================
+   * SHADOWS — stage lighting, not material
+   * Kaelum shadows are LONG, SOFT, DIRECTIONAL — like a single
+   * key light. Avoid puffy material drop shadows.
+   * ============================================================ */
+
+  --shadow-cinematic: 0 24px 80px -24px rgba(0, 0, 0, 0.65),
+                      0 8px 24px -8px rgba(0, 0, 0, 0.45);
+  --shadow-stage:     0 60px 120px -40px rgba(0, 0, 0, 0.85);   /* big hero */
+  --shadow-soft:      0 1px 0 rgba(242, 239, 232, 0.04) inset,
+                      0 12px 32px -12px rgba(0, 0, 0, 0.5);
+  --glow-accent:      0 0 32px -4px rgba(177, 43, 43, 0.55);
+  --glow-ember:       0 0 32px -4px rgba(210, 116, 90, 0.45);   /* legacy / warm-mode alt */
+
+  /* ============================================================
+   * RADII — small, restrained. Photos and cards keep 6–12px max.
+   * Pills only for tags/chips. No comically rounded blobs.
+   * ============================================================ */
+
+  --r-xs:   2px;
+  --r-sm:   4px;
+  --r-md:   8px;
+  --r-lg:   12px;
+  --r-xl:   20px;
+  --r-pill: 999px;
+
+  /* ============================================================
+   * SPACING — 4px base, generous at the top end.
+   * Negative space is the brand. Default to MORE space.
+   * ============================================================ */
+
+  --s-1:   4px;
+  --s-2:   8px;
+  --s-3:   12px;
+  --s-4:   16px;
+  --s-5:   24px;
+  --s-6:   32px;
+  --s-7:   48px;
+  --s-8:   64px;
+  --s-9:   96px;
+  --s-10: 128px;
+  --s-11: 192px;   /* hero breathing room */
+
+  /* ============================================================
+   * TYPOGRAPHY — type families
+   * Display: Geist (clean modern sans, replaces deck's bold sans)
+   * Editorial: Italiana (hairline serif — for wordmark + pull quotes)
+   * Mono: Geist Mono (rare, for system labels)
+   * ============================================================ */
+
+  --font-display:   'Geist', 'Helvetica Neue', system-ui, -apple-system, sans-serif;
+  --font-body:      'Geist', 'Helvetica Neue', system-ui, -apple-system, sans-serif;
+  --font-editorial: 'Italiana', 'Cormorant Garamond', 'Times New Roman', serif;
+  --font-mono:      'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* Type scale — editorial, generous, calm */
+  --t-display:  clamp(56px, 8vw, 128px);   /* hero statements */
+  --t-h1:       clamp(40px, 5vw, 72px);
+  --t-h2:       clamp(28px, 3.4vw, 48px);
+  --t-h3:       20px;
+  --t-h4:       16px;
+  --t-body:     17px;
+  --t-small:    14px;
+  --t-micro:    11px;                      /* eyebrows, page nums */
+
+  /* Line heights — tight at the top, calm at the body */
+  --lh-display: 0.95;
+  --lh-heading: 1.10;
+  --lh-body:    1.55;
+  --lh-loose:   1.75;
+
+  /* Letter-spacing — wide on small caps, tight on big display */
+  --ls-tight:    -0.025em;
+  --ls-normal:    0;
+  --ls-wide:      0.06em;
+  --ls-eyebrow:   0.22em;                  /* used on all eyebrow labels */
+  --ls-wordmark:  0.45em;                  /* K · A · E · L · U · M */
+
+  /* Weights */
+  --w-thin:     200;
+  --w-light:    300;
+  --w-regular:  400;
+  --w-medium:   500;
+  --w-semi:     600;
+  --w-bold:     700;
+  --w-black:    900;
+
+  /* ============================================================
+   * MOTION — calm, certain, deliberate. No bounce. No spring.
+   * Kaelum moves with cinematic restraint.
+   * ============================================================ */
+
+  --ease-out:     cubic-bezier(0.16, 1, 0.3, 1);     /* expo-out — primary */
+  --ease-in-out:  cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-linear:  linear;
+  --dur-fast:     180ms;
+  --dur-base:     360ms;
+  --dur-slow:     720ms;
+  --dur-cine:    1200ms;                              /* hero fades */
+}
+
+/* ============================================================
+ * SEMANTIC ELEMENT STYLES — apply via class or element
+ * Components consume these instead of raw tokens.
+ * ============================================================ */
+
+html, body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: var(--t-body);
+  line-height: var(--lh-body);
+  font-weight: var(--w-regular);
+  font-feature-settings: 'ss01', 'ss02', 'cv11';
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* --- Display & headings --- */
+.k-display, .k-h1, .k-h2, .k-h3, .k-h4 {
+  font-family: var(--font-display);
+  color: var(--fg);
+  margin: 0;
+}
+
+.k-display {
+  font-size: var(--t-display);
+  font-weight: var(--w-bold);
+  line-height: var(--lh-display);
+  letter-spacing: var(--ls-tight);
+  text-wrap: balance;
+}
+
+.k-h1 { font-size: var(--t-h1); font-weight: var(--w-bold); line-height: var(--lh-heading); letter-spacing: var(--ls-tight); text-wrap: balance; }
+.k-h2 { font-size: var(--t-h2); font-weight: var(--w-bold); line-height: var(--lh-heading); letter-spacing: var(--ls-tight); text-wrap: balance; }
+.k-h3 { font-size: var(--t-h3); font-weight: var(--w-semi); line-height: 1.25; letter-spacing: -0.01em; }
+.k-h4 { font-size: var(--t-h4); font-weight: var(--w-semi); line-height: 1.35; }
+
+/* --- Editorial / wordmark --- */
+.k-wordmark {
+  font-family: var(--font-editorial);
+  font-weight: var(--w-regular);
+  letter-spacing: var(--ls-wordmark);
+  text-transform: uppercase;
+  color: var(--fg);
+}
+
+.k-quote {
+  font-family: var(--font-editorial);
+  font-size: clamp(28px, 3.4vw, 52px);
+  line-height: 1.2;
+  font-style: italic;
+  color: var(--crimson);
+  text-wrap: pretty;
+}
+
+/* --- Body & meta --- */
+.k-body  { font-size: var(--t-body);  line-height: var(--lh-body); color: var(--fg); }
+.k-lede  { font-size: 20px;            line-height: 1.5; color: var(--fg-muted); text-wrap: pretty; }
+.k-small { font-size: var(--t-small);  line-height: 1.5; color: var(--fg-muted); }
+
+/* --- Eyebrow label — the brand's most recognizable type pattern --- */
+.k-eyebrow {
+  font-family: var(--font-display);
+  font-size: var(--t-micro);
+  font-weight: var(--w-bold);
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--crimson);
+  display: inline-block;
+}
+
+.k-eyebrow--muted { color: var(--fg-muted); }
+
+/* --- Footer / page-number bar — recurring footer pattern --- */
+.k-footer-meta {
+  font-family: var(--font-display);
+  font-size: var(--t-micro);
+  font-weight: var(--w-semi);
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--fg-subtle);
+}
+
+/* --- Mono (system labels, page numbers, build info) --- */
+.k-mono {
+  font-family: var(--font-mono);
+  font-size: var(--t-small);
+  letter-spacing: 0;
+  color: var(--fg-muted);
+}
+
+/* --- Light surface opt-in (porcelain pages) --- */
+.k-surface-light {
+  background: var(--porcelain);
+  color: var(--obsidian);
+  --fg: var(--obsidian);
+  --fg-muted: #5C636B;
+  --border: rgba(11, 12, 14, 0.10);
+  --border-strong: rgba(11, 12, 14, 0.22);
+}
+
+/* --- Accent rule — the signature crimson vertical bar --- */
+.k-accent-rule {
+  width: 2px;
+  background: var(--crimson);
+  align-self: stretch;
+  min-height: 56px;
+}
