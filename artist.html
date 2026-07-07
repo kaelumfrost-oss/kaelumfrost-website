@@ -351,8 +351,31 @@
     letter-spacing: .04em;
     margin: 0;
   }
-  .slot video { width: 100%; height: 100%; object-fit: contain; background: var(--obsidian-pure); }
   .slot--portrait { aspect-ratio: 9 / 16; }
+
+  /* the tape: vertical film, framed like a stage */
+  .tape {
+    max-width: 420px;
+    margin: 0 auto;
+  }
+  .tape video {
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    object-fit: cover;
+    border-radius: var(--r-md);
+    border: 1px solid var(--border);
+    background: var(--obsidian-pure);
+    box-shadow: var(--shadow-stage);
+  }
+  .tape__label {
+    margin-top: 18px;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--fg-subtle);
+  }
 
   /* reels row */
   .reels {
@@ -531,19 +554,26 @@
   </figure>
 </section>
 
-<!-- When the piano photograph is exported, drop it in as assets/photo/piano-loft.jpeg
-     and add a scene here (copy the scene--offset block above). It belongs between
-     the listening image and the portrait: instrument before the voice. -->
-
 <section class="scene scene--offset">
   <figure class="scene__media reveal reveal--slow" style="margin:0">
-    <img src="assets/photo/glitter-vulnerable.jpeg" alt="Kaelum in a black turtleneck, looking straight into the lens" loading="lazy" decoding="async">
+    <img src="assets/photo/web/piano-loft.jpg" alt="Kaelum seated on an old piano in warm light, looking towards the window" loading="lazy" decoding="async">
     <span class="anno">K∧ELUM · STILL 03</span>
   </figure>
   <div class="fragment reveal">
     <div class="fragment__rule"></div>
+    <p>An old piano, an open window...<br><span class="soft">most of what I know about honesty,<br>I learned sitting here.</span></p>
+  </div>
+</section>
+
+<section class="scene scene--offset flip">
+  <div class="fragment reveal">
+    <div class="fragment__rule"></div>
     <p>No costume in this one.<br><span class="soft">A voice, a face, a decision...<br>to be seen whole, or not at all.</span></p>
   </div>
+  <figure class="scene__media reveal reveal--slow" style="margin:0">
+    <img src="assets/photo/glitter-vulnerable.jpeg" alt="Kaelum in a black turtleneck, looking straight into the lens" loading="lazy" decoding="async">
+    <span class="anno">K∧ELUM · STILL 04</span>
+  </figure>
 </section>
 
 <section class="scene scene--bleed">
@@ -556,25 +586,35 @@
   </div>
 </section>
 
+<section class="scene scene--offset">
+  <figure class="scene__media reveal reveal--slow" style="margin:0">
+    <img src="assets/photo/earbuds-gaze.jpeg" alt="Kaelum with wet hair and earbuds, looking into the lens" loading="lazy" decoding="async">
+    <span class="anno">K∧ELUM · STILL 05</span>
+  </figure>
+  <div class="fragment reveal">
+    <div class="fragment__rule"></div>
+    <p>Look long enough and you will hear it too...<br><span class="soft">the note underneath the noise.</span></p>
+  </div>
+</section>
+
 <!-- ============ PERFORMANCES ============ -->
 <section class="sec" id="performances">
   <div class="sec__index"><span>§01 / PERFORMANCES</span><span>SOUND · SOON</span></div>
   <h2 class="sec__title reveal">The voice, live.</h2>
-  <p class="sec__note reveal">This room is being prepared. What belongs here is not a promise, it is a recording... and recordings take the time they take.</p>
+  <p class="sec__note reveal">One take, at the piano where the songs are written. More tapes as they are made.</p>
 
   <div class="stage">
-    <!-- PERFORMANCE FILM SLOT
-         Drop the first performance video at: assets/video/performance-01.mp4
-         (compress to under ~15 MB for the web: ffmpeg -i in.mp4 -vf scale=-2:1080 -crf 26 out.mp4)
-         The script at the bottom of this page detects the file automatically
-         and replaces the empty state with a player. Nothing else to edit. -->
-    <div class="slot slot--film reveal" id="performanceSlot">
-      <div class="slot__empty">
-        <span class="slot__pulse" aria-hidden="true"></span>
-        <p class="slot__line">First recordings arriving.</p>
-        <p class="slot__sub">The songs exist. The tape is on its way.</p>
-      </div>
-    </div>
+    <!-- To add the next tape: copy this figure, point it at
+         assets/video/performance-02.mp4 and its own poster frame.
+         Compress uploads to ~10 MB first:
+         ffmpeg -i in.mp4 -vf scale=720:1280 -crf 28 -movflags +faststart out.mp4 -->
+    <figure class="tape reveal" style="margin:0">
+      <video controls playsinline preload="metadata"
+             src="assets/video/performance-01.mp4"
+             poster="assets/video/performance-01-poster.jpg"
+             aria-label="Kaelum singing at the piano"></video>
+      <figcaption class="tape__label">Tape 001 · at the piano</figcaption>
+    </figure>
   </div>
 </section>
 
@@ -612,9 +652,9 @@
 </section>
 
 <!-- More photographs from the recent shoots can join the sequence above as they
-     are exported. Suggested homes:
-       assets/photo/piano-loft.jpeg    (sepia, seated on the piano)  → scene after "listening"
+     are exported. Still waiting on:
        assets/photo/platform.jpeg      (white shirt, tiled platform) → scene before the crowd
+       assets/photo/glitter-wide.jpeg  (wide mist variant)           → alternate hero or bleed
        assets/photo/mirror-olive.jpeg  (olive double figure)         → backdrop for the closing below
      Keep captions free of any city or place name. -->
 
@@ -678,22 +718,6 @@
     update();
   }
 
-  /* ---------- performance film auto-detect ---------- */
-  var slot = document.getElementById('performanceSlot');
-  if (slot && window.location.protocol !== 'file:') {
-    fetch('assets/video/performance-01.mp4', { method: 'HEAD' }).then(function (res) {
-      if (!res.ok) return;
-      var type = res.headers.get('content-type') || '';
-      if (type.indexOf('video') === -1 && type.indexOf('octet-stream') === -1) return;
-      var v = document.createElement('video');
-      v.src = 'assets/video/performance-01.mp4';
-      v.controls = true;
-      v.playsInline = true;
-      v.preload = 'metadata';
-      slot.innerHTML = '';
-      slot.appendChild(v);
-    }).catch(function () {});
-  }
 })();
 </script>
 
