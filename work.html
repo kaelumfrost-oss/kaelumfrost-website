@@ -1,0 +1,1174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kaelum · Work | Strategy, Brand Architecture, Revenue Systems</title>
+<meta name="description" content="Selected work by Kaelum: business strategy, brand architecture and revenue systems for creative founders, communities and multi-passionate creators.">
+<link rel="stylesheet" href="styles/kaelum-tokens.css">
+<style>
+/* ============================================================
+ * KAELUM — WORK / THE ARCHITECT
+ * Editorial business portfolio on the obsidian stage.
+ * Same house as index.html; more structured, more precise.
+ * ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--obsidian);
+  color: var(--fg);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+::selection { background: var(--crimson); color: var(--porcelain); }
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+
+/* ---------- ambient stage: drifting gradient + film grain ---------- */
+.bgdrift {
+  position: fixed; inset: -22%; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(58% 46% at 18% 16%, rgba(177,43,43,0.075), transparent 62%),
+    radial-gradient(50% 42% at 82% 74%, rgba(78,92,114,0.11), transparent 62%),
+    radial-gradient(70% 60% at 50% 110%, rgba(5,6,8,0.7), transparent 70%);
+  animation: drift 46s var(--ease-in-out) infinite alternate;
+  will-change: transform;
+}
+@keyframes drift {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to   { transform: translate3d(3.5%, -2.5%, 0) scale(1.07); }
+}
+.grain {
+  position: fixed; inset: 0; z-index: 90; pointer-events: none;
+  mix-blend-mode: overlay; opacity: .18;
+  background-image: repeating-linear-gradient(0deg, rgba(255,255,255,0.06) 0 1px, transparent 1px 3px);
+}
+
+/* ---------- layout primitives (mirrors site.css) ---------- */
+.wrap { width: min(1280px, 100% - 96px); margin-inline: auto; }
+section { position: relative; }
+
+.eyebrow {
+  font-family: var(--font-display);
+  font-size: var(--t-micro);
+  font-weight: var(--w-bold);
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--crimson);
+  display: inline-flex; align-items: center; gap: 10px;
+}
+.eyebrow--muted { color: var(--fg-muted); }
+.eyebrow .tick { width: 18px; height: 1px; background: currentColor; opacity: .8; }
+
+.anno {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--fg-subtle);
+  text-transform: uppercase;
+}
+.anno--accent { color: var(--crimson); }
+
+.sec-index {
+  position: absolute; top: 0; left: 0;
+  display: flex; align-items: center; gap: 14px;
+  padding: 28px 0;
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em;
+  color: var(--fg-subtle); text-transform: uppercase;
+}
+.sec-index::before { content: ""; width: 40px; height: 1px; background: var(--border-strong); }
+
+.btn {
+  font-family: var(--font-display); font-size: 12px; font-weight: var(--w-semi); letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase; padding: 18px 32px; border-radius: var(--r-xs); border: 1px solid transparent;
+  background: var(--crimson); color: var(--porcelain); cursor: pointer; line-height: 1;
+  display: inline-block; transition: background var(--dur-base) var(--ease-out); white-space: nowrap;
+}
+.btn:hover { background: var(--crimson-deep); }
+.btn:active { opacity: .85; }
+
+/* ---------- nav (pill, matches index) ---------- */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 60;
+  display: flex; justify-content: center;
+  padding: 22px 24px;
+  pointer-events: none;
+}
+.nav__inner {
+  pointer-events: auto;
+  display: flex; align-items: center; gap: 40px;
+  padding: 12px 14px 12px 26px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--border);
+  background: rgba(16, 17, 20, 0.55);
+  backdrop-filter: blur(14px) saturate(1.1);
+  -webkit-backdrop-filter: blur(14px) saturate(1.1);
+  box-shadow: var(--shadow-cinematic);
+}
+.nav__brand {
+  font-family: var(--font-editorial); font-size: 16px;
+  letter-spacing: 0.42em; text-transform: uppercase; color: var(--porcelain);
+  padding-right: 0.42em; white-space: nowrap;
+}
+.nav__links { display: flex; gap: 30px; }
+.nav__links a {
+  font-family: var(--font-display); font-size: 11px; font-weight: var(--w-semi);
+  letter-spacing: var(--ls-eyebrow); text-transform: uppercase; color: var(--steel);
+  transition: color var(--dur-base) var(--ease-out); white-space: nowrap;
+}
+.nav__links a:hover { color: var(--porcelain); }
+.nav__cta {
+  font-family: var(--font-display); font-size: 11px; font-weight: var(--w-semi);
+  letter-spacing: var(--ls-eyebrow); text-transform: uppercase;
+  color: var(--porcelain); background: var(--crimson);
+  padding: 12px 22px; border-radius: var(--r-pill); white-space: nowrap;
+  transition: background var(--dur-base) var(--ease-out);
+}
+.nav__cta:hover { background: var(--crimson-deep); }
+
+/* ---------- hero (typographic) ---------- */
+.hero {
+  position: relative;
+  min-height: 92svh;
+  display: flex; align-items: flex-end;
+  overflow: hidden;
+  padding-bottom: clamp(56px, 10vh, 128px);
+}
+.hero::after {
+  content: ""; position: absolute; inset: auto 0 0 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-strong) 20%, var(--border-strong) 80%, transparent);
+}
+.hero__anno { position: absolute; z-index: 5; display: flex; align-items: center; gap: 10px; }
+.hero__anno--tl { top: clamp(96px, 13vh, 132px); left: clamp(24px, 4vw, 64px); }
+.hero__anno--tr { top: clamp(96px, 13vh, 132px); right: clamp(24px, 4vw, 64px); }
+.hero__anno .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--crimson); box-shadow: var(--glow-accent); }
+.hero__content { position: relative; z-index: 2; }
+.hero__content > * { opacity: 0; transform: translateY(24px);
+  transition: opacity 1100ms var(--ease-out), transform 1100ms var(--ease-out); }
+body.hero-in .hero__content > * { opacity: 1; transform: none; }
+body.hero-in .hero__content > *:nth-child(1) { transition-delay: 300ms; }
+body.hero-in .hero__content > *:nth-child(2) { transition-delay: 440ms; }
+body.hero-in .hero__content > *:nth-child(3) { transition-delay: 580ms; }
+body.hero-in .hero__content > *:nth-child(4) { transition-delay: 720ms; }
+.hero__eyebrow { margin-bottom: 30px; }
+.hero__title {
+  font-family: var(--font-display); font-weight: var(--w-bold);
+  font-size: clamp(40px, 6.4vw, 94px);
+  line-height: 0.94; letter-spacing: -0.035em; color: var(--porcelain);
+  margin: 0; max-width: 14ch; text-wrap: balance;
+}
+.hero__title .em { font-family: var(--font-editorial); font-style: italic; font-weight: 400; letter-spacing: -0.005em; color: var(--crimson); }
+.hero__sub { margin-top: 34px; max-width: 52ch; font-size: 19px; line-height: 1.6; color: var(--smoke); }
+.hero__meta { display: flex; align-items: center; gap: 26px; margin-top: 44px; flex-wrap: wrap; }
+.hero__meta span {
+  font-family: var(--font-display); font-size: 11px; font-weight: var(--w-semi);
+  letter-spacing: var(--ls-eyebrow); text-transform: uppercase; color: var(--steel);
+}
+.hero__meta span + span::before { content: "·"; margin-right: 26px; color: var(--crimson); }
+.scrollcue { position: absolute; z-index: 5; bottom: 28px; right: clamp(24px, 4vw, 64px); display: flex; align-items: center; gap: 12px;
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--steel); }
+.scrollcue__line { width: 56px; height: 1px; background: var(--border-strong); position: relative; overflow: hidden; }
+.scrollcue__line::after { content: ""; position: absolute; inset: 0; width: 40%; background: var(--crimson);
+  animation: cue 2.6s var(--ease-in-out) infinite; }
+@keyframes cue { 0% { transform: translateX(-100%);} 60%,100% { transform: translateX(280%);} }
+
+/* ---------- value proposition ---------- */
+.vp { padding: 160px 0; }
+.vp__head { display: flex; align-items: stretch; gap: 32px; margin-bottom: 48px; }
+.vp__rule { width: 2px; background: var(--crimson); align-self: stretch; min-height: 56px; }
+.vp__statement {
+  font-family: var(--font-display); font-weight: var(--w-regular);
+  font-size: clamp(24px, 3.1vw, 44px);
+  line-height: 1.28; letter-spacing: -0.02em;
+  color: var(--porcelain); margin: 0; max-width: 32ch; text-wrap: balance;
+}
+.vp__support { font-size: 18px; line-height: 1.68; color: var(--steel); margin: 0 0 0 34px; max-width: 66ch; }
+
+.caps { margin-top: 120px; }
+.caps__head { display: flex; flex-direction: column; gap: 18px; margin-bottom: 64px; }
+.caps__head h2 {
+  font-family: var(--font-display); font-weight: var(--w-bold);
+  font-size: clamp(32px, 4.4vw, 64px); letter-spacing: -0.025em; line-height: 1.02; margin: 0;
+}
+.caps__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 48px; }
+.cap {
+  border-top: 1px solid var(--border-strong); padding-top: 24px;
+  display: flex; flex-direction: column; gap: 14px;
+  opacity: 0; transform: translateY(20px);
+  transition: opacity var(--dur-cine) var(--ease-out), transform var(--dur-cine) var(--ease-out);
+}
+.cap.in { opacity: 1; transform: none; }
+.cap__n { font-family: var(--font-mono); font-size: 11px; color: var(--crimson); letter-spacing: 0.06em; }
+.cap__t { font-family: var(--font-display); font-size: 21px; font-weight: var(--w-semi); letter-spacing: -0.015em; margin: 0; color: var(--porcelain); }
+.cap__d { font-size: 15px; line-height: 1.6; color: var(--steel); margin: 0; }
+.vp__result {
+  margin-top: 110px; padding-top: 56px; border-top: 1px solid var(--border);
+  font-family: var(--font-editorial); font-style: italic;
+  font-size: clamp(26px, 3.4vw, 50px); line-height: 1.22; color: var(--porcelain);
+  max-width: 30ch; text-wrap: pretty;
+}
+.vp__result .hl { color: var(--crimson); }
+
+/* ---------- selected work ---------- */
+.work { padding: 160px 0 120px; border-top: 1px solid var(--border); }
+.work__head { margin-bottom: 88px; }
+.work__head h2 { font-family: var(--font-display); font-weight: var(--w-bold); font-size: clamp(36px, 4.6vw, 68px); letter-spacing: -0.025em; margin: 18px 0 0; }
+.work__layout { display: grid; grid-template-columns: 240px 1fr; gap: 72px; align-items: start; }
+
+.workrail { position: sticky; top: 140px; display: flex; flex-direction: column; }
+.workrail__label { margin-bottom: 26px; }
+.workrail a {
+  display: grid; grid-template-columns: 34px 1fr; align-items: baseline; gap: 12px;
+  padding: 15px 0; border-top: 1px solid var(--border);
+  opacity: .42;
+  transition: opacity var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out);
+}
+.workrail a:last-of-type { border-bottom: 1px solid var(--border); }
+.workrail a .n { font-family: var(--font-mono); font-size: 11px; color: var(--steel); transition: color var(--dur-base) var(--ease-out); }
+.workrail a .c { font-family: var(--font-display); font-size: 15px; font-weight: var(--w-semi); letter-spacing: -0.01em; color: var(--porcelain); }
+.workrail a:hover { opacity: .85; }
+.workrail a.active { opacity: 1; transform: translateX(6px); }
+.workrail a.active .n { color: var(--crimson); }
+
+.study { padding: 8px 0 96px; }
+.study + .study { border-top: 1px solid var(--border-strong); padding-top: 88px; }
+.study__eyebrow { margin-bottom: 22px; }
+.study__client {
+  font-family: var(--font-editorial);
+  font-size: clamp(40px, 5vw, 76px);
+  font-weight: 400; line-height: 0.98; letter-spacing: 0.01em;
+  color: var(--porcelain); margin: 0;
+}
+.study__dek { font-family: var(--font-display); font-size: clamp(17px, 1.7vw, 22px); line-height: 1.45; color: var(--smoke); margin: 22px 0 0; max-width: 52ch; letter-spacing: -0.01em; }
+.study__cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 56px; }
+.study__col .lbl {
+  font-family: var(--font-display); font-size: 10px; font-weight: var(--w-bold);
+  letter-spacing: var(--ls-eyebrow); text-transform: uppercase; color: var(--crimson);
+  display: block; margin-bottom: 14px; padding-top: 16px; border-top: 1px solid var(--border-strong);
+}
+.study__col p { font-size: 15px; line-height: 1.66; color: var(--steel); margin: 0; }
+
+.moves { margin-top: 56px; }
+.moves__lbl {
+  font-family: var(--font-display); font-size: 10px; font-weight: var(--w-bold);
+  letter-spacing: var(--ls-eyebrow); text-transform: uppercase; color: var(--fg-muted);
+  display: block; margin-bottom: 6px;
+}
+.move { border-bottom: 1px solid var(--border); }
+.move summary {
+  list-style: none; cursor: pointer;
+  display: grid; grid-template-columns: 40px 1fr 24px; align-items: baseline; gap: 16px;
+  padding: 22px 0;
+}
+.move summary::-webkit-details-marker { display: none; }
+.move summary .mn { font-family: var(--font-mono); font-size: 11px; color: var(--crimson); }
+.move summary .mt { font-family: var(--font-display); font-size: 18px; font-weight: var(--w-semi); letter-spacing: -0.015em; color: var(--porcelain); transition: color var(--dur-base) var(--ease-out); }
+.move summary .mx {
+  font-family: var(--font-mono); font-size: 16px; color: var(--steel); text-align: right;
+  transition: transform var(--dur-base) var(--ease-out), color var(--dur-base) var(--ease-out);
+}
+.move summary:hover .mt { color: var(--crimson-soft); }
+.move[open] summary .mx { transform: rotate(45deg); color: var(--crimson); }
+.move__body { padding: 0 0 26px 56px; }
+.move__body p { font-size: 15px; line-height: 1.66; color: var(--steel); margin: 0; max-width: 62ch; }
+
+.outcome {
+  margin-top: 52px; padding: 6px 0 6px 30px;
+  border-left: 2px solid var(--crimson);
+}
+.outcome .lbl {
+  font-family: var(--font-display); font-size: 10px; font-weight: var(--w-bold);
+  letter-spacing: var(--ls-eyebrow); text-transform: uppercase; color: var(--fg-muted);
+  display: block; margin-bottom: 12px;
+}
+.outcome p { font-size: 17px; line-height: 1.62; color: var(--porcelain); margin: 0; max-width: 60ch; }
+
+.stats { display: flex; gap: 64px; margin-top: 52px; padding-top: 36px; border-top: 1px solid var(--border); flex-wrap: wrap; }
+.stat { display: flex; flex-direction: column; gap: 8px; }
+.stat__num {
+  font-family: var(--font-display); font-weight: var(--w-bold);
+  font-size: clamp(30px, 3vw, 42px); letter-spacing: -0.02em; color: var(--crimson); line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.stat__lbl {
+  font-family: var(--font-display); font-size: 11px; font-weight: var(--w-semi);
+  letter-spacing: var(--ls-eyebrow); text-transform: uppercase; color: var(--steel); max-width: 24ch; line-height: 1.6;
+}
+.proof { margin-top: 44px; }
+.proof .lbl {
+  font-family: var(--font-display); font-size: 10px; font-weight: var(--w-bold);
+  letter-spacing: var(--ls-eyebrow); text-transform: uppercase; color: var(--fg-muted);
+  display: block; margin-bottom: 16px;
+}
+.proof__chips { display: flex; flex-wrap: wrap; gap: 10px; }
+.chip {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em;
+  color: var(--steel); border: 1px solid var(--border-strong); border-radius: var(--r-pill);
+  padding: 8px 14px; white-space: nowrap;
+  transition: color var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out);
+}
+.chip:hover { color: var(--porcelain); border-color: var(--crimson); }
+
+/* ---------- capabilities matrix + maturity path ---------- */
+.matrix { padding: 160px 0; border-top: 1px solid var(--border); }
+.matrix__head { margin-bottom: 72px; }
+.matrix__head h2 { font-family: var(--font-display); font-weight: var(--w-bold); font-size: clamp(36px, 4.6vw, 68px); letter-spacing: -0.025em; margin: 18px 0 0; }
+.matrix__list { border-top: 1px solid var(--border-strong); }
+.mrow {
+  display: grid; grid-template-columns: 260px 1fr; gap: 40px; align-items: start;
+  padding: 34px 0; border-bottom: 1px solid var(--border);
+  transition: background var(--dur-base) var(--ease-out);
+}
+.mrow:hover { background: rgba(255,255,255,0.015); }
+.mrow__t { font-family: var(--font-display); font-size: 20px; font-weight: var(--w-semi); letter-spacing: -0.015em; color: var(--porcelain); margin: 0; padding-top: 3px; }
+.mrow__chips { display: flex; flex-wrap: wrap; gap: 10px; }
+
+.path { margin-top: 130px; }
+.path__head { display: flex; flex-direction: column; gap: 18px; margin-bottom: 64px; }
+.path__head h3 { font-family: var(--font-display); font-weight: var(--w-bold); font-size: clamp(26px, 3.2vw, 44px); letter-spacing: -0.025em; margin: 0; }
+.path__track { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; }
+.path__track::before {
+  content: ""; position: absolute; top: 4px; left: 0; right: 0; height: 1px;
+  background: var(--border-strong);
+}
+.step {
+  position: relative; padding-top: 34px;
+  opacity: 0; transform: translateY(20px);
+  transition: opacity var(--dur-cine) var(--ease-out), transform var(--dur-cine) var(--ease-out);
+}
+.step.in { opacity: 1; transform: none; }
+.step::before {
+  content: ""; position: absolute; top: 0; left: 0; width: 9px; height: 9px;
+  border-radius: 50%; background: var(--obsidian); border: 1px solid var(--crimson);
+}
+.step.in::before { background: var(--crimson); box-shadow: var(--glow-accent); }
+.step__n { font-family: var(--font-mono); font-size: 11px; color: var(--crimson); letter-spacing: 0.06em; display: block; margin-bottom: 12px; }
+.step__t { font-family: var(--font-editorial); font-size: clamp(24px, 2.4vw, 34px); font-weight: 400; color: var(--porcelain); margin: 0 0 12px; }
+.step__d { font-size: 14px; line-height: 1.62; color: var(--steel); margin: 0; }
+
+/* ---------- offer: the signal sprint ---------- */
+.sprint { padding: 160px 0; border-top: 1px solid var(--border); }
+.sprint__panel {
+  position: relative; border: 1px solid var(--border-strong); border-radius: var(--r-md);
+  background: linear-gradient(160deg, #15171b 0%, #0a0b0d 70%);
+  padding: clamp(44px, 6.5vw, 100px); overflow: hidden;
+}
+.sprint__panel::before { content: ""; position: absolute; inset: 0; opacity: .5; pointer-events: none;
+  background-image: linear-gradient(to right, rgba(168,178,190,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(168,178,190,0.04) 1px, transparent 1px);
+  background-size: 64px 64px; -webkit-mask-image: radial-gradient(80% 120% at 100% 0%, #000, transparent 70%); mask-image: radial-gradient(80% 120% at 100% 0%, #000, transparent 70%); }
+.sprint__inner { position: relative; }
+.sprint__panel h2 {
+  font-family: var(--font-display); font-weight: var(--w-bold);
+  font-size: clamp(38px, 5vw, 78px); letter-spacing: -0.03em; line-height: 0.98;
+  margin: 24px 0 0; text-wrap: balance;
+}
+.sprint__panel h2 .em { font-family: var(--font-editorial); font-style: italic; font-weight: 400; color: var(--crimson); }
+.sprint__lede { font-size: 19px; line-height: 1.62; color: var(--smoke); margin: 30px 0 0; max-width: 56ch; }
+.sprint__who { font-size: 16px; line-height: 1.68; color: var(--steel); margin: 22px 0 0; max-width: 60ch; }
+.sprint__who .q { color: var(--porcelain); font-style: italic; font-family: var(--font-editorial); font-size: 19px; }
+
+.sprint__grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 72px; margin-top: 72px; align-items: start; }
+.deliv .lbl {
+  font-family: var(--font-display); font-size: 10px; font-weight: var(--w-bold);
+  letter-spacing: var(--ls-eyebrow); text-transform: uppercase; color: var(--crimson);
+  display: block; margin-bottom: 10px;
+}
+.deliv__row {
+  display: grid; grid-template-columns: 40px 1fr; gap: 16px; align-items: baseline;
+  padding: 20px 0; border-bottom: 1px solid var(--border);
+}
+.deliv__row:first-of-type { border-top: 1px solid var(--border-strong); }
+.deliv__row .n { font-family: var(--font-mono); font-size: 11px; color: var(--crimson); }
+.deliv__row .t { font-family: var(--font-display); font-size: 17px; line-height: 1.5; color: var(--porcelain); letter-spacing: -0.01em; }
+.deliv__row .t small { display: block; font-size: 14px; color: var(--steel); margin-top: 4px; font-family: var(--font-body); }
+
+.sprint__side { display: flex; flex-direction: column; gap: 44px; }
+.format .lbl, .guarantee .lbl {
+  font-family: var(--font-display); font-size: 10px; font-weight: var(--w-bold);
+  letter-spacing: var(--ls-eyebrow); text-transform: uppercase; color: var(--fg-muted);
+  display: block; margin-bottom: 16px;
+}
+.format p { font-size: 15px; line-height: 1.7; color: var(--steel); margin: 0 0 10px; }
+.format p b { color: var(--porcelain); font-weight: var(--w-semi); }
+.guarantee { border-left: 2px solid var(--crimson); padding-left: 26px; }
+.guarantee p {
+  font-family: var(--font-editorial); font-style: italic;
+  font-size: clamp(20px, 2vw, 26px); line-height: 1.4; color: var(--porcelain); margin: 0;
+}
+.sprint__truth { margin-top: 64px; padding-top: 40px; border-top: 1px solid var(--border); font-size: 16px; line-height: 1.7; color: var(--steel); max-width: 58ch; }
+.sprint__truth b { color: var(--porcelain); font-weight: var(--w-semi); }
+.sprint__cta { display: flex; align-items: center; gap: 28px; margin-top: 44px; flex-wrap: wrap; }
+.sprint__micro { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.04em; color: var(--steel); }
+
+/* ---------- the silent list ---------- */
+.silent { padding: 150px 0; border-top: 1px solid var(--border); }
+.silent__inner { max-width: 620px; margin: 0 auto; text-align: center; display: flex; flex-direction: column; align-items: center; }
+.silent h2 {
+  font-family: var(--font-display); font-weight: var(--w-bold);
+  font-size: clamp(28px, 3.6vw, 52px); letter-spacing: -0.025em; line-height: 1.1;
+  margin: 26px 0 0; text-wrap: balance;
+}
+.silent h2 .em { font-family: var(--font-editorial); font-style: italic; font-weight: 400; color: var(--crimson); }
+.silent p { font-size: 16px; line-height: 1.65; color: var(--steel); margin: 22px 0 0; max-width: 44ch; }
+.silent__form { width: 100%; margin-top: 44px; min-height: 110px; }
+.silent__note { margin-top: 20px; font-family: var(--font-mono); font-size: 11px; color: var(--fg-subtle); letter-spacing: 0.04em; }
+
+/* ---------- footer ---------- */
+.foot { padding: 110px 0 56px; border-top: 1px solid var(--border); }
+.foot__brand { font-family: var(--font-editorial); font-size: clamp(48px, 9vw, 140px); letter-spacing: 0.06em; text-transform: uppercase; color: var(--porcelain); line-height: .9; }
+.foot__line { margin-top: 26px; font-family: var(--font-display); font-size: clamp(15px, 1.6vw, 19px); color: var(--steel); letter-spacing: -0.01em; }
+.foot__meta { display: flex; justify-content: space-between; align-items: center; gap: 24px; margin-top: 72px; padding-top: 28px; border-top: 1px solid var(--border); flex-wrap: wrap; }
+.foot__meta a, .foot__meta span {
+  font-family: var(--font-display); font-size: 11px; font-weight: var(--w-semi);
+  letter-spacing: var(--ls-eyebrow); text-transform: uppercase; color: var(--fg-subtle);
+  transition: color var(--dur-base) var(--ease-out);
+}
+.foot__meta a:hover { color: var(--porcelain); }
+
+/* ---------- reveal ---------- */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity var(--dur-cine) var(--ease-out), transform var(--dur-cine) var(--ease-out); }
+.reveal.in { opacity: 1; transform: none; }
+
+/* ---------- reduced motion: everything visible, everything still ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .bgdrift { animation: none; }
+  .scrollcue__line::after { animation: none; }
+  .hero__content > * { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .reveal, .cap, .step { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .step::before { background: var(--crimson); box-shadow: none; }
+  .workrail a, .move summary .mx, .chip, .mrow { transition: none; }
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 1080px) {
+  .work__layout { grid-template-columns: 1fr; gap: 0; }
+  .workrail { display: none; }
+  .caps__grid { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+  .study__cols { grid-template-columns: 1fr; gap: 28px; }
+  .mrow { grid-template-columns: 1fr; gap: 18px; padding: 28px 0; }
+  .path__track { grid-template-columns: repeat(2, 1fr); }
+  .path__track::before { display: none; }
+  .step { padding-top: 0; padding-left: 26px; }
+  .step::before { top: 6px; }
+  .sprint__grid { grid-template-columns: 1fr; gap: 56px; }
+}
+@media (max-height: 720px) {
+  .hero__anno { display: none; }
+}
+@media (max-width: 720px) {
+  .wrap { width: calc(100% - 40px); }
+  .nav__links { display: none; }
+  .hero { min-height: 88svh; }
+  .hero__anno--tr { display: none; }
+  .scrollcue { display: none; }
+  .hero__title { font-size: clamp(40px, 11.5vw, 64px); }
+  .hero__sub { font-size: 17px; }
+  .hero__meta { gap: 14px; }
+  .hero__meta span + span::before { margin-right: 14px; }
+  .vp, .work, .matrix, .sprint, .silent { padding-top: 110px; padding-bottom: 110px; }
+  .vp__head { gap: 20px; }
+  .vp__support { margin-left: 22px; }
+  .caps__grid { grid-template-columns: 1fr; }
+  .path__track { grid-template-columns: 1fr; gap: 32px; }
+  .stats { gap: 36px; }
+  .move summary { grid-template-columns: 28px 1fr 24px; }
+  .move__body { padding-left: 44px; }
+  .study + .study { padding-top: 72px; }
+  .study { padding-bottom: 72px; }
+  .sprint__panel { padding: 36px 24px; }
+  .sprint__cta { flex-direction: column; align-items: flex-start; gap: 18px; }
+  .foot__meta { flex-direction: column; align-items: flex-start; gap: 14px; }
+}
+</style>
+</head>
+<body>
+
+<div class="bgdrift" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+
+<!-- ============ NAV ============ -->
+<nav class="nav" aria-label="Primary">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__brand">KAELUM</a>
+    <div class="nav__links">
+      <a href="#value">Value</a>
+      <a href="#selected">Selected Work</a>
+      <a href="#capabilities">Capabilities</a>
+    </div>
+    <a href="#sprint" class="nav__cta">The Sprint</a>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="top">
+  <div class="hero__anno hero__anno--tl anno"><span class="dot"></span>K∧ELUM · ARCHITECT FILE</div>
+  <div class="hero__anno hero__anno--tr anno anno--accent">PORTFOLIO · MMXXVI / 002</div>
+
+  <div class="hero__content wrap">
+    <div class="hero__eyebrow eyebrow"><span class="tick"></span>Kaelum</div>
+    <h1 class="hero__title">I turn ambitious visions into <span class="em">revenue systems.</span></h1>
+    <p class="hero__sub">Designing hybrid business models, building the digital infrastructure that captures demand, and creating the brand narrative that makes people want in.</p>
+    <div class="hero__meta">
+      <span>Business Strategist</span>
+      <span>Branding Specialist</span>
+      <span>Selected Work</span>
+    </div>
+  </div>
+
+  <div class="scrollcue"><span class="scrollcue__line"></span>Scroll · the work</div>
+</header>
+
+<!-- ============ VALUE PROPOSITION ============ -->
+<section class="vp" id="value">
+  <div class="wrap">
+    <div class="sec-index"><span>§01 / THE VALUE PROPOSITION</span></div>
+
+    <div class="vp__head reveal">
+      <div class="vp__rule" aria-hidden="true"></div>
+      <p class="vp__statement">I help organisations bridge the distance between their current reality and their maximum potential: designing high-impact strategies, then building the systems that execute them.</p>
+    </div>
+    <p class="vp__support reveal">Whether transitioning a hospitality project into a niche community, evolving an NGO from donation dependency to financial hybridity, or architecting a personal brand into a category of one, the focus is the same. Build scalable systems that align profit with purpose, and make the path from stranger to believer feel inevitable.</p>
+
+    <div class="caps">
+      <div class="caps__head reveal">
+        <div class="eyebrow eyebrow--muted"><span class="tick"></span>What makes this profile rare</div>
+        <h2>Four capabilities, one operator.</h2>
+      </div>
+      <div class="caps__grid">
+        <div class="cap" data-delay="0">
+          <span class="cap__n">01</span>
+          <h3 class="cap__t">Business Model Design</h3>
+          <p class="cap__d">Hybrid revenue architecture, tiered pricing, MVP validation, unit economics.</p>
+        </div>
+        <div class="cap" data-delay="1">
+          <span class="cap__n">02</span>
+          <h3 class="cap__t">Brand &amp; Narrative</h3>
+          <p class="cap__d">Positioning, archetype systems, voice, and the emotional hook that sells the concept.</p>
+        </div>
+        <div class="cap" data-delay="2">
+          <span class="cap__n">03</span>
+          <h3 class="cap__t">Digital Infrastructure</h3>
+          <p class="cap__d">Email funnels, landing pages, lead magnets, automation. The demand-capture layer.</p>
+        </div>
+        <div class="cap" data-delay="3">
+          <span class="cap__n">04</span>
+          <h3 class="cap__t">Content &amp; Creative</h3>
+          <p class="cap__d">Multi-platform content systems, web design, editorial design that ships.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="vp__result reveal">The result: <span class="hl">strategy that ships.</span> A vision becomes a model, the model becomes a funnel, the funnel becomes revenue... handled by one person who sees the whole chain.</p>
+  </div>
+</section>
+
+<!-- ============ SELECTED WORK ============ -->
+<section class="work" id="selected">
+  <div class="wrap">
+    <div class="sec-index"><span>§02 / SELECTED WORK</span></div>
+
+    <div class="work__head reveal">
+      <div class="eyebrow eyebrow--muted"><span class="tick"></span>Four engagements · strategy to system to revenue</div>
+      <h2>Selected work.</h2>
+    </div>
+
+    <div class="work__layout">
+
+      <aside class="workrail" aria-label="Case study navigation">
+        <div class="eyebrow eyebrow--muted workrail__label"><span class="tick"></span>Index</div>
+        <a href="#study-cosmica" data-study="study-cosmica"><span class="n">01</span><span class="c">Grupo Cósmica</span></a>
+        <a href="#study-hogar" data-study="study-hogar"><span class="n">02</span><span class="c">HOGAR</span></a>
+        <a href="#study-kaelum" data-study="study-kaelum"><span class="n">03</span><span class="c">Kaelum</span></a>
+        <a href="#study-larche" data-study="study-larche"><span class="n">04</span><span class="c">L'Arche Brazil</span></a>
+      </aside>
+
+      <div class="work__studies">
+
+        <!-- 01 · GRUPO CÓSMICA -->
+        <article class="study" id="study-cosmica">
+          <div class="reveal">
+            <div class="eyebrow study__eyebrow"><span class="tick"></span>01 · Brand Expansion</div>
+            <h3 class="study__client">Grupo Cósmica</h3>
+            <p class="study__dek">From a beloved local farm brand to a global creative-community ecosystem.</p>
+          </div>
+
+          <div class="study__cols reveal">
+            <div class="study__col">
+              <span class="lbl">Context</span>
+              <p>A Brazilian ecosystem of three brands: Fazenda Cósmica, a countryside farm; Casa Cósmica, an urban space; and Clube Cósmica, a membership community, anchored by a professional gastronomy operation. The vision was exceptional. What was missing was the execution layer to reach an international audience and convert attention into members and revenue.</p>
+            </div>
+            <div class="study__col">
+              <span class="lbl">Challenge</span>
+              <p>A brilliant but internal-facing strategy. No unified brand hub, no international presence, no lead-capture mechanism. Every advertising dollar bought attention that immediately evaporated; no email list, no nurture, no system to hold a lead between one event and the next.</p>
+            </div>
+            <div class="study__col">
+              <span class="lbl">Solution</span>
+              <p>Designed and began executing the full go-to-market and digital infrastructure layer: a residency MVP to validate the membership hypothesis with real revenue, an email-first capture-and-nurture engine, a unified social architecture, and an international content strategy built on the brand's strongest universal hook, the Loneliness Paradox: we live connected, yet more alone than ever.</p>
+            </div>
+          </div>
+
+          <div class="moves reveal">
+            <span class="moves__lbl">Key moves</span>
+            <details class="move">
+              <summary><span class="mn">01</span><span class="mt">The Residency MVP</span><span class="mx">+</span></summary>
+              <div class="move__body"><p>Designed Cosmica Residency as a 7 to 10 day founding-cohort experience, 10 to 16 spots, all-inclusive at US$1.5K per seat, that mirrors the entire Clube experience in miniature, validating willingness-to-pay before any expensive platform was built.</p></div>
+            </details>
+            <details class="move">
+              <summary><span class="mn">02</span><span class="mt">The Trojan-Horse Funnel</span><span class="mx">+</span></summary>
+              <div class="move__body"><p>A free, editorially designed city guide, "C-Side of São Paulo", as the lead magnet, into a 3-email nurture sequence, into the residency application. The guide ends, by design, at the farm.</p></div>
+            </details>
+            <details class="move">
+              <summary><span class="mn">03</span><span class="mt">The landing page</span><span class="mx">+</span></summary>
+              <div class="move__body"><p>Built and launched the conversion-focused residency landing page, live, with pricing tiers, gallery, and a single clear CTA into the email list.</p></div>
+            </details>
+            <details class="move">
+              <summary><span class="mn">04</span><span class="mt">Unified social architecture</span><span class="mx">+</span></summary>
+              <div class="move__body"><p>A hub-and-spoke @grupocosmica / @clubecosmica model, a five-line editorial content system, and a respectful audience-transition plan turning an existing Portuguese audience into fuel for the new international hub.</p></div>
+            </details>
+            <details class="move">
+              <summary><span class="mn">05</span><span class="mt">"Don't build the app yet"</span><span class="mx">+</span></summary>
+              <div class="move__body"><p>The highest-leverage recommendation: replace the planned custom app, a R$200K line item, with a web-based MVP stack of email, WhatsApp and BetterMode, saving the budget for proof of engagement first.</p></div>
+            </details>
+          </div>
+
+          <div class="outcome reveal">
+            <span class="lbl">Outcome</span>
+            <p>A complete, launch-ready growth system: live landing page, designed lead magnet, full 3-email nurture sequence, and a 30-day content calendar, converting cold attention into an owned audience the brand controls.</p>
+          </div>
+
+          <div class="stats reveal">
+            <div class="stat">
+              <span class="stat__num"><span class="cnt" data-target="30">30</span></span>
+              <span class="stat__lbl">Day content calendar, ready to run</span>
+            </div>
+            <div class="stat">
+              <span class="stat__num"><span class="cnt" data-target="3">3</span></span>
+              <span class="stat__lbl">Email nurture sequence, written and built</span>
+            </div>
+            <div class="stat">
+              <span class="stat__num">R$<span class="cnt" data-target="200">200</span>K</span>
+              <span class="stat__lbl">Custom-app spend deferred via web-based MVP</span>
+            </div>
+          </div>
+
+          <div class="proof reveal">
+            <span class="lbl">Proof assets</span>
+            <div class="proof__chips">
+              <span class="chip">Live landing page</span>
+              <span class="chip">C-Side guide</span>
+              <span class="chip">30-day calendar</span>
+              <span class="chip">3-email nurture</span>
+              <span class="chip">Social transition playbook</span>
+              <span class="chip">Short-form video reel</span>
+              <span class="chip">Feed post</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 02 · HOGAR -->
+        <article class="study" id="study-hogar">
+          <div class="reveal">
+            <div class="eyebrow study__eyebrow"><span class="tick"></span>02 · Strategic Repositioning</div>
+            <h3 class="study__client">HOGAR</h3>
+            <p class="study__dek">A total identity and revenue-model overhaul: from generic hostel to a destination creative community in the Atlantic Forest.</p>
+          </div>
+
+          <div class="study__cols reveal">
+            <div class="study__col">
+              <span class="lbl">Context</span>
+              <p>A hospitality project in Ubatuba, formerly "Lar Arco-Íris", with a generic eco-hostel model and unpredictable revenue. It had a remarkable physical asset: Atlantic Forest, a waterfall, reliable WiFi, no phone signal. But no brand, no diversified income, and no system to fill beds consistently.</p>
+            </div>
+            <div class="study__col">
+              <span class="lbl">Challenge</span>
+              <p>Move away from the low-margin, commoditised hostel model toward a high-value, sustainable community for digital nomads and artists, and do it with almost no budget: under R$1,500 for launch.</p>
+            </div>
+            <div class="study__col">
+              <span class="lbl">Solution</span>
+              <p>Authored a complete phased action plan to pivot the brand into HOGAR, meaning "home", a creative co-living and retreat space built around a signature differentiator: the Cacau Ecobar, a ceremonial-cacao bar no competitor could replicate. The model rests on a self-reinforcing flywheel; retreats fill the bar, the bar creates content and community, and content drives the next retreat.</p>
+            </div>
+          </div>
+
+          <div class="moves reveal">
+            <span class="moves__lbl">Key moves</span>
+            <details class="move">
+              <summary><span class="mn">01</span><span class="mt">Three-pillar revenue model</span><span class="mx">+</span></summary>
+              <div class="move__body"><p>Private retreats carrying 50 to 60% of revenue, creative co-living 25 to 30%, and the Cacau Ecobar with experiences and products 15 to 25%.</p></div>
+            </details>
+            <details class="move">
+              <summary><span class="mn">02</span><span class="mt">Tiered co-living: "HOGAR Reset"</span><span class="mx">+</span></summary>
+              <div class="move__body"><p>Explorer, 14 days: taste the reset, a short immersion to seed word-of-mouth and feed the content engine. Creator, 30 days: the core stay; remote work, ritual, and creative output in the forest. Resident, 60 to 90 days: anchor occupancy, long-term residents who stabilise revenue and become the community core.</p></div>
+            </details>
+            <details class="move">
+              <summary><span class="mn">03</span><span class="mt">The Cacau Ecobar as brand engine</span><span class="mx">+</span></summary>
+              <div class="move__body"><p>A full MVP menu of ceremonial cacao drinks, cacao cocktails and local petiscos, blending hospitality with ritual into a content-rich value proposition.</p></div>
+            </details>
+            <details class="move">
+              <summary><span class="mn">04</span><span class="mt">Phased maturity path</span><span class="mx">+</span></summary>
+              <div class="move__body"><p>A four-phase roadmap, Foundation to Systematisation to Scale to Maturity, with week-by-week actions, partnerships, automation, and hiring triggers tied to revenue.</p></div>
+            </details>
+            <details class="move">
+              <summary><span class="mn">05</span><span class="mt">Exit strategy</span><span class="mx">+</span></summary>
+              <div class="move__body"><p>A 12-month capital-accumulation plan toward a R$1M land purchase, with five financing routes from owner-financing to community equity.</p></div>
+            </details>
+          </div>
+
+          <div class="outcome reveal">
+            <span class="lbl">Outcome</span>
+            <p>A documented operating system designed to let the owners transition to 70%+ remote management within a year, on a staged revenue ramp that starts at R$15K per month and matures past R$100K per month.</p>
+          </div>
+
+          <div class="stats reveal">
+            <div class="stat">
+              <span class="stat__num"><span class="cnt" data-target="3">3</span></span>
+              <span class="stat__lbl">Revenue pillars replacing a single income stream</span>
+            </div>
+            <div class="stat">
+              <span class="stat__num"><span class="cnt" data-target="70">70</span>%+</span>
+              <span class="stat__lbl">Remote management within a year, by design</span>
+            </div>
+            <div class="stat">
+              <span class="stat__num">R$<span class="cnt" data-target="1">1</span>M</span>
+              <span class="stat__lbl">Land-purchase target, 12-month capital plan</span>
+            </div>
+          </div>
+
+          <div class="proof reveal">
+            <span class="lbl">Proof assets</span>
+            <div class="proof__chips">
+              <span class="chip">Phased action plan</span>
+              <span class="chip">Revenue model</span>
+              <span class="chip">Brand identity &amp; launch kit</span>
+              <span class="chip">Cacau Ecobar menu</span>
+              <span class="chip">Partnership &amp; automation playbooks</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 03 · KAELUM -->
+        <article class="study" id="study-kaelum">
+          <div class="reveal">
+            <div class="eyebrow study__eyebrow"><span class="tick"></span>03 · Personal Brand &amp; Category Design</div>
+            <h3 class="study__client">Kaelum</h3>
+            <p class="study__dek">Architecting a multi-passionate creator into a category of one: the Reality Architect.</p>
+          </div>
+
+          <div class="study__cols reveal">
+            <div class="study__col">
+              <span class="lbl">Context</span>
+              <p>A solo creative, musician, philosopher and strategist, operating in the crowded manifestation and business-content space on TikTok and Instagram, at risk of being read as "someone who does many things". The challenge of every multi-passionate founder: coherence.</p>
+            </div>
+            <div class="study__col">
+              <span class="lbl">Challenge</span>
+              <p>Avoid the multi-niche trap. Position one person with many expressions as a single, cohesive, commercially expandable brand; distinct enough to escape a saturated market and structured enough to monetise without diluting the art.</p>
+            </div>
+            <div class="study__col">
+              <span class="lbl">Solution</span>
+              <p>Designed a complete personal-brand architecture built on one idea and a new category: the Reality Architect. Not coach, not influencer, not creator. One philosophy, expressed through three coordinated branches. Reality bends around identity.</p>
+            </div>
+          </div>
+
+          <div class="moves reveal">
+            <span class="moves__lbl">Key moves</span>
+            <details class="move">
+              <summary><span class="mn">01</span><span class="mt">Archetype system</span><span class="mx">+</span></summary>
+              <div class="move__body"><p>50% Outlaw for rebellion, 30% Sage for intelligence, 20% Creator for beauty. Rare, ownable, hard to copy.</p></div>
+            </details>
+            <details class="move">
+              <summary><span class="mn">02</span><span class="mt">Trinity architecture</span><span class="mx">+</span></summary>
+              <div class="move__body"><p>The Artist for broad emotional reach, The Host for community and belonging, The Architect for high-ticket revenue. A thinking tool that prevents brand drift as it scales.</p></div>
+            </details>
+            <details class="move">
+              <summary><span class="mn">03</span><span class="mt">Phased build &amp; flywheel</span><span class="mx">+</span></summary>
+              <div class="move__body"><p>A Signal to Bridge to Scale roadmap with a hard 14-day launch rule and a parallel revenue track running from week three, not sequentially.</p></div>
+            </details>
+            <details class="move">
+              <summary><span class="mn">04</span><span class="mt">Offer ecosystem</span><span class="mx">+</span></summary>
+              <div class="move__body"><p>A four-tier ladder with external names a cold audience understands in one sentence, holding a $500 minimum entry and premium positioning from day one.</p></div>
+            </details>
+            <details class="move">
+              <summary><span class="mn">05</span><span class="mt">Content &amp; voice system</span><span class="mx">+</span></summary>
+              <div class="move__body"><p>Six content pillars, an "Identity Truth Bomb" signature format, and a cinematic urban visual identity treated as an active brand asset.</p></div>
+            </details>
+          </div>
+
+          <div class="outcome reveal">
+            <span class="lbl">Outcome</span>
+            <p>A complete, launch-ready brand operating system: positioning, archetype, architecture, offer ladder, content engine, visual identity, and a 12-week build plan with explicit success signals, engineered for a solo operator to run sustainably.</p>
+          </div>
+
+          <div class="stats reveal">
+            <div class="stat">
+              <span class="stat__num">$<span class="cnt" data-target="500">500</span></span>
+              <span class="stat__lbl">Minimum entry; premium from day one</span>
+            </div>
+            <div class="stat">
+              <span class="stat__num"><span class="cnt" data-target="14">14</span></span>
+              <span class="stat__lbl">Day hard launch rule</span>
+            </div>
+            <div class="stat">
+              <span class="stat__num"><span class="cnt" data-target="12">12</span></span>
+              <span class="stat__lbl">Week build plan with explicit success signals</span>
+            </div>
+          </div>
+
+          <div class="proof reveal">
+            <span class="lbl">Proof assets</span>
+            <div class="proof__chips">
+              <span class="chip">Brand strategy architecture</span>
+              <span class="chip">Living strategy doc</span>
+              <span class="chip">Offer ecosystem</span>
+              <span class="chip">Content pillar system</span>
+              <span class="chip">Visual identity direction</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 04 · L'ARCHE BRAZIL -->
+        <article class="study" id="study-larche">
+          <div class="reveal">
+            <div class="eyebrow study__eyebrow"><span class="tick"></span>04 · Financial Sustainability</div>
+            <h3 class="study__client">L'Arche Brazil</h3>
+            <p class="study__dek">Designing financial independence for a social-impact community, without compromising its mission.</p>
+          </div>
+
+          <div class="study__cols reveal">
+            <div class="study__col">
+              <span class="lbl">Context</span>
+              <p>L'Arche Brazil is a life-sharing community for people with intellectual disabilities in São Paulo, running on a frugal budget of around R$60,000 per month that was 100% dependent on donations; exposed to unpredictable revenue, with little room to grow.</p>
+            </div>
+            <div class="study__col">
+              <span class="lbl">Challenge</span>
+              <p>Reduce donation dependency and build predictable income while staying absolutely faithful to the community's mission and charism. Financial strategy that generates human value, not just money, with low risk and ethical guardrails for resident participation.</p>
+            </div>
+            <div class="study__col">
+              <span class="lbl">Solution</span>
+              <p>Authored a Financial Sustainability Project to progressively move the community from a donations-only model to a hybrid one, with the long-term goal of doubling the monthly budget over 2 to 3 years, structured around a 90-day pilot so every format is tested before it scales.</p>
+            </div>
+          </div>
+
+          <div class="moves reveal">
+            <span class="moves__lbl">Key moves</span>
+            <details class="move">
+              <summary><span class="mn">01</span><span class="mt">Five-pillar hybrid model</span><span class="mx">+</span></summary>
+              <div class="move__body"><p>Grants and institutional funding; workshops and experiences at R$150 per person; a solidarity natural-cosmetics line at around R$70 margin per kit; arts, music and public speaking; and transversal branding and digital comms.</p></div>
+            </details>
+            <details class="move">
+              <summary><span class="mn">02</span><span class="mt">Revenue-mix shift</span><span class="mx">+</span></summary>
+              <div class="move__body"><p>From 100% donations to a diversified target mix across donations, grants, workshops, cosmetics and arts. Donations stay vital, but no longer the single point of failure.</p></div>
+            </details>
+            <details class="move">
+              <summary><span class="mn">03</span><span class="mt">Grants engine</span><span class="mx">+</span></summary>
+              <div class="move__body"><p>A reusable 2 to 3 page "anchor project" concept to submit to foundations and L'Arche International.</p></div>
+            </details>
+            <details class="move">
+              <summary><span class="mn">04</span><span class="mt">Social enterprise</span><span class="mx">+</span></summary>
+              <div class="move__body"><p>A solid-bar cosmetics line, soap, shampoo, conditioner, sold via workshops, events, and a future subscription, with a clear path from 250 to 500 kits per month.</p></div>
+            </details>
+            <details class="move">
+              <summary><span class="mn">05</span><span class="mt">Centre of experience</span><span class="mx">+</span></summary>
+              <div class="move__body"><p>Repurposing the community atelier into a paid-workshop venue that generates revenue, content, and new donor relationships at once.</p></div>
+            </details>
+            <details class="move">
+              <summary><span class="mn">06</span><span class="mt">Risk &amp; governance</span><span class="mx">+</span></summary>
+              <div class="move__body"><p>Small pilots, technical and regulatory support, ethical limits on resident participation, and simple indicators reviewed every 90 days.</p></div>
+            </details>
+          </div>
+
+          <div class="outcome reveal">
+            <span class="lbl">Outcome</span>
+            <p>A staged, low-risk roadmap with a 90-day pilot, so leadership can decide what to scale, adjust, or stop based on real data. Days 1 to 30: foundation. Days 31 to 60: launch pilots. Days 61 to 90: measure and decide.</p>
+          </div>
+
+          <div class="stats reveal">
+            <div class="stat">
+              <span class="stat__num">+R$<span class="cnt" data-target="29">29</span>K</span>
+              <span class="stat__lbl">Per month additional revenue; conservative, 12 to 24 months</span>
+            </div>
+            <div class="stat">
+              <span class="stat__num">R$<span class="cnt" data-target="120">120</span>K</span>
+              <span class="stat__lbl">Per month total budget; the ambitious 3-year goal</span>
+            </div>
+            <div class="stat">
+              <span class="stat__num"><span class="cnt" data-target="90">90</span></span>
+              <span class="stat__lbl">Day pilot; test before scaling</span>
+            </div>
+          </div>
+
+          <div class="proof reveal">
+            <span class="lbl">Proof assets</span>
+            <div class="proof__chips">
+              <span class="chip">15-slide strategy</span>
+              <span class="chip">Grants anchor framework</span>
+              <span class="chip">Product unit economics</span>
+              <span class="chip">90-day pilot plan</span>
+              <span class="chip">Risk &amp; governance model</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CAPABILITIES + MATURITY PATH ============ -->
+<section class="matrix" id="capabilities">
+  <div class="wrap">
+    <div class="sec-index"><span>§03 / CAPABILITIES</span></div>
+
+    <div class="matrix__head reveal">
+      <div class="eyebrow eyebrow--muted"><span class="tick"></span>Skills &amp; methodology</div>
+      <h2>Capabilities.</h2>
+    </div>
+
+    <div class="matrix__list reveal">
+      <div class="mrow">
+        <h3 class="mrow__t">Business Strategy</h3>
+        <div class="mrow__chips">
+          <span class="chip">Hybrid revenue-model design</span>
+          <span class="chip">MVP development &amp; validation</span>
+          <span class="chip">Tiered pricing</span>
+          <span class="chip">Unit economics</span>
+          <span class="chip">Cash-flow projection</span>
+          <span class="chip">Capital accumulation &amp; exit strategy</span>
+        </div>
+      </div>
+      <div class="mrow">
+        <h3 class="mrow__t">Brand &amp; Positioning</h3>
+        <div class="mrow__chips">
+          <span class="chip">Category design</span>
+          <span class="chip">Archetype systems</span>
+          <span class="chip">Narrative &amp; messaging architecture</span>
+          <span class="chip">Voice &amp; tone systems</span>
+          <span class="chip">Value-proposition design</span>
+          <span class="chip">Objection handling</span>
+        </div>
+      </div>
+      <div class="mrow">
+        <h3 class="mrow__t">Growth &amp; Marketing</h3>
+        <div class="mrow__chips">
+          <span class="chip">Funnel design</span>
+          <span class="chip">Email infrastructure &amp; nurture</span>
+          <span class="chip">Lead-magnet strategy</span>
+          <span class="chip">Paid-traffic structure</span>
+          <span class="chip">Launch playbooks</span>
+          <span class="chip">Creator partnerships</span>
+        </div>
+      </div>
+      <div class="mrow">
+        <h3 class="mrow__t">Web &amp; Digital Build</h3>
+        <div class="mrow__chips">
+          <span class="chip">Conversion-focused landing pages</span>
+          <span class="chip">Lead-capture systems</span>
+          <span class="chip">Web-based MVP stacks</span>
+          <span class="chip">Automation: WhatsApp, CRM, email</span>
+          <span class="chip">Analytics &amp; UTM tracking</span>
+        </div>
+      </div>
+      <div class="mrow">
+        <h3 class="mrow__t">Content &amp; Editorial</h3>
+        <div class="mrow__chips">
+          <span class="chip">Multi-platform content systems</span>
+          <span class="chip">Editorial-line frameworks</span>
+          <span class="chip">Short-form video strategy</span>
+          <span class="chip">Long-form editorial design</span>
+          <span class="chip">Copywriting across channels</span>
+        </div>
+      </div>
+      <div class="mrow">
+        <h3 class="mrow__t">Automation &amp; Ops</h3>
+        <div class="mrow__chips">
+          <span class="chip">WhatsApp Business</span>
+          <span class="chip">CRM: Guesty, Hospitable</span>
+          <span class="chip">Kit, Mailchimp, ConvertKit</span>
+          <span class="chip">SOPs</span>
+          <span class="chip">Systems that run without the founder</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="path">
+      <div class="path__head reveal">
+        <div class="eyebrow"><span class="tick"></span>The methodology · applied across every engagement</div>
+        <h3>The four-phase Maturity Path.</h3>
+      </div>
+      <div class="path__track">
+        <div class="step" data-delay="0">
+          <span class="step__n">01</span>
+          <h4 class="step__t">Foundation</h4>
+          <p class="step__d">Immediate actions, brand foundation, first revenue pipeline.</p>
+        </div>
+        <div class="step" data-delay="1">
+          <span class="step__n">02</span>
+          <h4 class="step__t">Systematisation</h4>
+          <p class="step__d">Automate operations, scale what works, add essential support.</p>
+        </div>
+        <div class="step" data-delay="2">
+          <span class="step__n">03</span>
+          <h4 class="step__t">Scale</h4>
+          <p class="step__d">Increase marketing investment, diversify products, begin remote management.</p>
+        </div>
+        <div class="step" data-delay="3">
+          <span class="step__n">04</span>
+          <h4 class="step__t">Legacy</h4>
+          <p class="step__d">Peak revenue goals, digital products, long-term asset acquisition.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE SIGNAL SPRINT ============ -->
+<section class="sprint" id="sprint">
+  <div class="wrap">
+    <div class="sec-index"><span>§04 / THE OFFER</span></div>
+
+    <div class="sprint__panel reveal">
+      <div class="sprint__inner">
+        <div class="eyebrow"><span class="tick"></span>Let's build · one sprint, one week</div>
+        <h2>The <span class="em">Signal Sprint.</span></h2>
+        <p class="sprint__lede">A 7-day sprint for multi-passionate creators. In seven days you know exactly who you are online, and exactly what to post for the next 30.</p>
+        <p class="sprint__who">For creators whose content feels scattered, whose bio keeps changing, who were told to pick a niche and felt that advice amputated them. The filter question is simple: <span class="q">do you keep rewriting your bio?</span></p>
+
+        <div class="sprint__grid">
+          <div class="deliv">
+            <span class="lbl">By day 7 you hold</span>
+            <div class="deliv__row"><span class="n">01</span><span class="t">Your positioning in one sentence<small>Built from your identity, not a niche.</small></span></div>
+            <div class="deliv__row"><span class="n">02</span><span class="t">Three content pillars<small>That hold everything you are, so you stop splitting yourself.</small></span></div>
+            <div class="deliv__row"><span class="n">03</span><span class="t">Fifteen video ideas<small>Mapped to those pillars.</small></span></div>
+            <div class="deliv__row"><span class="n">04</span><span class="t">Five ready-to-film scripts<small>In your voice, not a template's.</small></span></div>
+            <div class="deliv__row"><span class="n">05</span><span class="t">A 30-day posting plan<small>Zero decisions left about what to say for a month.</small></span></div>
+          </div>
+
+          <div class="sprint__side">
+            <div class="format">
+              <span class="lbl">The week</span>
+              <p><b>Day 1.</b> A 60-minute diagnosis call, recorded.</p>
+              <p><b>Days 2 to 5.</b> I build: positioning, pillars, ideas, scripts, plan.</p>
+              <p><b>Day 7.</b> A 30-minute delivery walkthrough, plus the full written document.</p>
+              <p><b>After.</b> Seven days of async voice-note support.</p>
+            </div>
+            <div class="guarantee">
+              <span class="lbl">The guarantee</span>
+              <p>If you finish the sprint and still do not know what to post for the next 30 days, you pay nothing.</p>
+            </div>
+          </div>
+        </div>
+
+        <p class="sprint__truth">The promise is not going viral. The promise is <b>clarity you can count</b>: one sentence, three pillars, fifteen ideas, five scripts, thirty days. And I am not selling this from a mountaintop; I am building the same thing in public. This page is the portfolio.</p>
+
+        <div class="sprint__cta">
+          <a class="btn" href="https://instagram.com/kaelumfrost" target="_blank" rel="noopener">Message me on Instagram</a>
+          <span class="sprint__micro">No forms, no funnels. A conversation.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE SILENT LIST ============ -->
+<section class="silent" id="silent">
+  <div class="wrap">
+    <div class="silent__inner reveal">
+      <div class="eyebrow eyebrow--muted"><span class="tick"></span>The silent list</div>
+      <h2>Leave your email. When something real ships, <span class="em">you hear it first.</span></h2>
+      <p>No sequence, no schedule, no noise. A line from me when there is something worth your attention, and silence the rest of the time.</p>
+      <div class="silent__form">
+        <script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="8982972a-4a25-489e-9d91-107959e46064"></script>
+      </div>
+      <div class="silent__note">Unsubscribe anytime.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__brand">KAELUM</div>
+    <div class="foot__line">Strategy that ships. A system that compounds.</div>
+    <div class="foot__meta">
+      <a href="mailto:contact@kaelumfrost.com">contact@kaelumfrost.com</a>
+      <a href="https://instagram.com/kaelumfrost" target="_blank" rel="noopener">@kaelumfrost</a>
+      <span>KAELUM · MMXXVI</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- hero entrance ---------- */
+  requestAnimationFrame(function () {
+    requestAnimationFrame(function () { document.body.classList.add('hero-in'); });
+  });
+
+  /* ---------- scroll reveal (general) ---------- */
+  /* reveal when intersecting, or immediately if already scrolled past
+     (scroll restoration on reload can land mid-page) */
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting || e.boundingClientRect.top < 0) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { rootMargin: '0px 0px -10% 0px', threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+
+  /* ---------- staggered reveals (capabilities + maturity steps) ---------- */
+  var stagIo = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting || e.boundingClientRect.top < 0) {
+        var d = RM ? 0 : parseInt(e.target.getAttribute('data-delay') || 0, 10) * 130;
+        setTimeout(function () { e.target.classList.add('in'); }, d);
+        stagIo.unobserve(e.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.1 });
+  document.querySelectorAll('.cap, .step').forEach(function (el) { stagIo.observe(el); });
+
+  /* ---------- count-up stats (static values kept when reduced motion) ---------- */
+  var counters = document.querySelectorAll('.cnt');
+  if (!RM && counters.length) {
+    counters.forEach(function (el) { el.textContent = '0'; });
+    var cntIo = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting && e.boundingClientRect.top >= 0) return;
+        cntIo.unobserve(e.target);
+        var el = e.target;
+        var target = parseInt(el.getAttribute('data-target'), 10);
+        var dur = 1300;
+        var t0 = null;
+        function tick(t) {
+          if (t0 === null) t0 = t;
+          var p = Math.min((t - t0) / dur, 1);
+          var eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = String(Math.round(eased * target));
+          if (p < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.4 });
+    counters.forEach(function (el) { cntIo.observe(el); });
+  }
+
+  /* ---------- sticky rail: highlight the study in view ---------- */
+  var railLinks = document.querySelectorAll('.workrail a[data-study]');
+  if (railLinks.length) {
+    var map = {};
+    railLinks.forEach(function (a) { map[a.getAttribute('data-study')] = a; });
+    var railIo = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        railLinks.forEach(function (a) { a.classList.remove('active'); });
+        var link = map[e.target.id];
+        if (link) link.classList.add('active');
+      });
+    }, { rootMargin: '-38% 0px -52% 0px', threshold: 0 });
+    document.querySelectorAll('.study').forEach(function (s) { railIo.observe(s); });
+  }
+})();
+</script>
+
+</body>
+</html>
