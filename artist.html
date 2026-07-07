@@ -390,8 +390,30 @@
     position: relative;
     z-index: 1;
     text-align: center;
-    padding: clamp(120px, 22vh, 260px) clamp(20px, 6vw, 96px);
+    padding: clamp(140px, 26vh, 300px) clamp(20px, 6vw, 96px);
+    isolation: isolate;
+    overflow: hidden;
   }
+  .closing__media {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+  }
+  .closing__media img {
+    width: 100%;
+    height: 114%;
+    object-fit: cover;
+    object-position: 50% 30%;
+    will-change: transform;
+  }
+  .closing__media .scene__scrim {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, var(--obsidian) 0%, rgba(11,12,14,.72) 22%, rgba(11,12,14,.66) 55%, var(--obsidian) 100%);
+  }
+  .closing__line { text-shadow: 0 2px 28px rgba(0,0,0,.6); }
   .closing__line {
     font-family: var(--font-editorial);
     font-size: clamp(30px, 4.4vw, 60px);
@@ -655,11 +677,14 @@
      are exported. Still waiting on:
        assets/photo/platform.jpeg      (white shirt, tiled platform) → scene before the crowd
        assets/photo/glitter-wide.jpeg  (wide mist variant)           → alternate hero or bleed
-       assets/photo/mirror-olive.jpeg  (olive double figure)         → backdrop for the closing below
      Keep captions free of any city or place name. -->
 
 <!-- ============ CLOSING ============ -->
 <section class="closing">
+  <div class="closing__media" aria-hidden="true">
+    <img src="assets/photo/web/mirror-olive.jpg" alt="" data-parallax="0.08" loading="lazy" decoding="async">
+    <div class="scene__scrim"></div>
+  </div>
   <p class="closing__line reveal">The songs are one door into the house.<br><span class="soft">If you want to know what the house believes...</span></p>
   <a class="closing__link reveal" href="index.html">Begin the story</a>
 </section>
