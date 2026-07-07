@@ -352,6 +352,16 @@
     margin: 0;
   }
   .slot--portrait { aspect-ratio: 9 / 16; }
+  .slot__still {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 20%;
+    opacity: .22;
+    filter: grayscale(0.7);
+  }
 
   /* the tape: vertical film, framed like a stage */
   .tape {
@@ -619,6 +629,17 @@
   </div>
 </section>
 
+<section class="scene scene--offset flip">
+  <div class="fragment reveal">
+    <div class="fragment__rule"></div>
+    <p>Every song is the same word,<br><span class="soft">sung differently...</span></p>
+  </div>
+  <figure class="scene__media reveal reveal--slow" style="margin:0">
+    <img src="assets/photo/web/self.jpg" alt="Black and white split portrait of Kaelum, the word SELF running down the divide" loading="lazy" decoding="async">
+    <span class="anno">K∧ELUM · STILL 06</span>
+  </figure>
+</section>
+
 <!-- ============ PERFORMANCES ============ -->
 <section class="sec" id="performances">
   <div class="sec__index"><span>§01 / PERFORMANCES</span><span>SOUND · SOON</span></div>
@@ -653,6 +674,7 @@
        bottom of this page: <script async src="https://www.instagram.com/embed.js"></script> -->
   <div class="reels">
     <div class="slot slot--portrait reveal">
+      <img class="slot__still" src="assets/photo/tank-direct.jpeg" alt="" loading="lazy" decoding="async">
       <div class="slot__empty">
         <p class="slot__line">Reserved.</p>
         <p class="slot__sub">A moving picture belongs here.</p>
@@ -673,10 +695,7 @@
   </div>
 </section>
 
-<!-- More photographs from the recent shoots can join the sequence above as they
-     are exported. Still waiting on:
-       assets/photo/platform.jpeg      (white shirt, tiled platform) → scene before the crowd
-       assets/photo/glitter-wide.jpeg  (wide mist variant)           → alternate hero or bleed
+<!-- New photographs join the sequence above as offset or bleed scenes.
      Keep captions free of any city or place name. -->
 
 <!-- ============ CLOSING ============ -->
