@@ -429,6 +429,14 @@
     color: var(--steel);
     opacity: 0.55;
   }
+  footer a {
+    color: var(--steel);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  footer a:hover, footer a:focus-visible { color: var(--porcelain); }
+  footer .sep { color: var(--crimson-soft); margin: 0 0.7em; }
+  footer .doors { display: inline-flex; flex-wrap: wrap; justify-content: center; align-items: baseline; }
 
   /* ---------- Transmission modal ---------- */
   .transmission {
@@ -753,7 +761,15 @@ The mirror does not decide your face.</p>
 
 </main>
 
-<footer>Kaelum</footer>
+<footer>
+  <span class="doors">
+    <a href="artist.html">The Artist</a>
+    <span class="sep" aria-hidden="true">·</span>
+    <a href="work.html">The Architect</a>
+    <span class="sep" aria-hidden="true">·</span>
+    <span>Kaelum</span>
+  </span>
+</footer>
 
 <!-- ================= TRANSMISSION MODAL ================= -->
 <dialog class="transmission" id="transmission" aria-label="The full transmission">
